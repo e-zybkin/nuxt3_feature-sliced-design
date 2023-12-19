@@ -1,4 +1,4 @@
-# Nuxt 3 + FSD (Feature Sliced Design) Minimal Starter
+# Nuxt 3 + FSD (Feature Sliced Design) Minimal Starter Example
 
 Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
 
