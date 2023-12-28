@@ -1,41 +1,53 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
+import { defineNuxtConfig } from 'nuxt/config'
+
 export default defineNuxtConfig({
-  devtools: { enabled: true },
-  runtimeConfig: {
-    ssr: true,
-},
-vue: {
-    defineModel: true,
-    propsDestructure: true,
-},
-components: [
-    {
-        path: '~/shared',
-        extensions: ['.vue'],
-        pathPrefix: true,
-        prefix: 'Shared',
+    devtools: { enabled: true },
+    typescript: {
+        strict: true,
     },
-    {
-        path: '~/features',
-        extensions: ['.vue'],
-        pathPrefix: true,
-        prefix: 'Feature',
+    runtimeConfig: {
+        ssr: true,
+        public: {
+            apiBase: process.env['API_BASE'],
+        },
     },
-    {
-        path: '~/widgets',
-        extensions: ['.vue'],
-        pathPrefix: true,
-        prefix: 'Widget',
+    vue: {
+        defineModel: true,
+        propsDestructure: true,
     },
-    {
-        path: '~/entities',
-        extensions: ['.vue'],
-        pathPrefix: true,
-        prefix: 'Entity',
+    components: [
+        {
+            path: 'shared',
+            extensions: ['.vue'],
+            prefix: 'Shared',
+        },
+        {
+            path: 'features',
+            extensions: ['.vue'],
+            prefix: 'Feature',
+        },
+        {
+            path: 'widgets',
+            extensions: ['.vue'],
+            prefix: 'Widget',
+        },
+        {
+            path: 'entities',
+            extensions: ['.vue'],
+            prefix: 'Entity',
+        },
+    ],
+    modules: ['@pinia/nuxt'],
+    alias: {
+        '@styles': './assets/styles',
     },
-],
-imports: {
-    dirs: ['shared/**', 'features/**', 'widgets/**', 'entities/**'],
-},
-modules: ['@pinia/nuxt'],
+    imports: {
+        dirs: [
+            'shared/**/*.ts',
+            'features/**/*.ts',
+            'widgets/**/*.ts',
+            'entities/**/*.ts',
+        ],
+    },
+    plugins: [{ src: 'node_modules/nuxtjs-phaser', mode: 'client' }],
 })
